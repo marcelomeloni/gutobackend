@@ -13,6 +13,7 @@ import estoqueRoutes from './modules/estoque/estoque.routes.js';
 import financeiroRoutes from './modules/financeiro/financeiro.routes.js';
 import usuariosRoutes from './modules/usuarios/usuarios.routes.js';
 import authRoutes from './modules/auth/auth.routes.js';
+
 import arquivosRoutes from './modules/arquivos/arquivos.routes.js';
 
 const app = express();

@@ -29,28 +29,3 @@ export const remove = async (id) => {
   if (error) throw error;
   return true;
 };
-
-// --- Entrevistas ---
-export const getAllEntrevistas = async () => {
-  const { data, error } = await supabase.from('imprensa_entrevistas').select('*, imprensa_veiculos(nome, tipo)').order('data_entrevista', { ascending: true });
-  if (error) throw error;
-  return data;
-};
-
-export const createEntrevista = async (payload) => {
-  const { data, error } = await supabase.from('imprensa_entrevistas').insert([payload]).select('*, imprensa_veiculos(nome, tipo)').single();
-  if (error) throw error;
-  return data;
-};
-
-export const updateEntrevista = async (id, payload) => {
-  const { data, error } = await supabase.from('imprensa_entrevistas').update(payload).eq('id', id).select('*, imprensa_veiculos(nome, tipo)').single();
-  if (error) throw error;
-  return data;
-};
-
-export const removeEntrevista = async (id) => {
-  const { error } = await supabase.from('imprensa_entrevistas').delete().eq('id', id);
-  if (error) throw error;
-  return true;
-};

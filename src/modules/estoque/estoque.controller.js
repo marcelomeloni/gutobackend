@@ -44,21 +44,3 @@ export const remove = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
-export const getMovimentacoes = async (req, res) => {
-  try {
-    const data = await estoqueService.getMovimentacoes();
-    res.json(data);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
-export const movimentar = async (req, res) => {
-  try {
-    const data = await estoqueService.movimentar(req.params.id, req.body);
-    res.json(data);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};

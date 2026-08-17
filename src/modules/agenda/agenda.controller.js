@@ -20,9 +20,13 @@ export const getOne = async (req, res) => {
 
 export const create = async (req, res) => {
   try {
+    console.log('--- NEW AGENDA POST REQUEST ---');
+    console.log('REQ.BODY:', req.body);
     const data = await agendaService.create(req.body);
+    console.log('SUCCESS:', data);
     res.status(201).json(data);
   } catch (error) {
+    console.error('CONTROLLER ERROR CAUGHT:', error);
     res.status(500).json({ error: error.message });
   }
 };

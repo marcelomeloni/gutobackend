@@ -14,7 +14,10 @@ export const getById = async (id) => {
 
 export const create = async (payload) => {
   const { data, error } = await supabase.from('agenda').insert([payload]).select().single();
-  if (error) throw error;
+  if (error) {
+    console.error('SUPABASE ERROR:', error, payload);
+    throw error;
+  }
   return data;
 };
 

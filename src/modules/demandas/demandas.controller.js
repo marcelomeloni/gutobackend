@@ -36,15 +36,6 @@ export const updateStatus = async (req, res) => {
   }
 };
 
-export const update = async (req, res) => {
-  try {
-    const data = await demandasService.updateDemanda(req.params.id, req.body);
-    res.json(data);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
 export const remove = async (req, res) => {
   try {
     await demandasService.deleteDemanda(req.params.id);
