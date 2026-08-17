@@ -2,7 +2,8 @@ import * as bairrosService from './bairros.service.js';
 
 export const getAll = async (req, res) => {
   try {
-    const data = await bairrosService.getAll();
+    const { municipio_id } = req.query;
+    const data = await bairrosService.getAll(municipio_id);
     res.json(data);
   } catch (error) {
     res.status(500).json({ error: error.message });

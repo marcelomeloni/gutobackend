@@ -1,7 +1,11 @@
 import { supabase } from '../../config/supabase.js';
 
-export const getAll = async () => {
-  const { data, error } = await supabase.from('bairros').select('*').order('created_at', { ascending: false });
+export const getAll = async (municipio_id) => {
+  let query = supabase.from('bairros').select('*').order('created_at', { ascending: false });
+  if (municipio_id) {
+    query = query.eq('municipio_id', municipio_id);
+  }
+  const { data, error } = await query;
   if (error) throw error;
   return data;
 };

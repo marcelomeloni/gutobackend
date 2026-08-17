@@ -35,8 +35,18 @@ export const createEntrevista = async (payload) => {
     if (veiculoData) {
       dbPayload.veiculo_id = veiculoData.id;
     } else {
-      // Store name in pauta prefix since there's no direct name field
-      dbPayload.pauta = `[${veiculo}] ${pauta}`;
+      // Auto-create the veiculo if it doesn't exist
+      const { data: newVeiculo } = await supabase
+        .from('imprensa_veiculos')
+        .insert([{ nome: veiculo, tipo: 'Outros' }])
+        .select()
+        .single();
+        
+      if (newVeiculo) {
+        dbPayload.veiculo_id = newVeiculo.id;
+      } else {
+        dbPayload.pauta = `[${veiculo}] ${pauta}`;
+      }
     }
   }
 

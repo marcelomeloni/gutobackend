@@ -13,6 +13,7 @@ import estoqueRoutes from './modules/estoque/estoque.routes.js';
 import financeiroRoutes from './modules/financeiro/financeiro.routes.js';
 import usuariosRoutes from './modules/usuarios/usuarios.routes.js';
 import authRoutes from './modules/auth/auth.routes.js';
+import municipiosRoutes from './modules/municipios/municipios.routes.js';
 
 import arquivosRoutes from './modules/arquivos/arquivos.routes.js';
 
@@ -35,6 +36,7 @@ app.use('/api/estoque', estoqueRoutes);
 app.use('/api/financeiro', financeiroRoutes);
 app.use('/api/usuarios', usuariosRoutes);
 app.use('/api/arquivos', arquivosRoutes);
+app.use('/api/municipios', municipiosRoutes);
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Backend Político Operacional' });

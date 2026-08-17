@@ -33,7 +33,7 @@ export const login = async (email, password) => {
 };
 
 export const register = async (userData) => {
-  const { nome, email, password, role, telefone } = userData;
+  const { nome, email, password, role, telefone, municipio_id } = userData;
   
   const salt = await bcrypt.genSalt(10);
   const senha_hash = await bcrypt.hash(password, salt);
@@ -43,7 +43,8 @@ export const register = async (userData) => {
     email,
     senha_hash,
     role: role || 'militante',
-    telefone
+    telefone,
+    municipio_id: municipio_id || null
   }]).select().single();
 
   if (error) throw error;
