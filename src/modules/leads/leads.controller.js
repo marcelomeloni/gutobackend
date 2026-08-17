@@ -36,6 +36,19 @@ export const update = async (req, res) => {
   }
 };
 
+export const updateEngajamento = async (req, res) => {
+  try {
+    const { engajamento } = req.body;
+    if (!engajamento) {
+      return res.status(400).json({ error: 'Campo engajamento é obrigatório.' });
+    }
+    const data = await leadsService.updateLead(req.params.id, { engajamento });
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 export const remove = async (req, res) => {
   try {
     await leadsService.deleteLead(req.params.id);

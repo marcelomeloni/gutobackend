@@ -3,10 +3,15 @@ import * as imprensaController from './imprensa.controller.js';
 
 const router = express.Router();
 
-router.get('/', imprensaController.getAll);
-router.get('/:id', imprensaController.getOne);
-router.post('/', imprensaController.create);
-router.put('/:id', imprensaController.update);
-router.delete('/:id', imprensaController.remove);
+// Entrevistas
+router.get('/', imprensaController.getAllEntrevistas);
+router.get('/veiculos', imprensaController.getAllVeiculos);
+router.post('/', imprensaController.createEntrevista);
+router.put('/:id', imprensaController.updateEntrevista);
+router.delete('/:id', imprensaController.removeEntrevista);
+
+// Veículos
+router.post('/veiculos', imprensaController.createVeiculo);
+router.delete('/veiculos/:id', imprensaController.removeVeiculo);
 
 export default router;

@@ -1,25 +1,45 @@
 import { supabase } from '../../config/supabase.js';
 
+// Supabase table: usuarios
+
 export const getAll = async () => {
-  const { data, error } = await supabase.from('usuarios').select('*').order('created_at', { ascending: false });
+  const { data, error } = await supabase
+    .from('usuarios')
+    .select('id, nome, email, role, telefone, created_at')
+    .order('created_at', { ascending: false });
   if (error) throw error;
   return data;
 };
 
 export const getById = async (id) => {
-  const { data, error } = await supabase.from('usuarios').select('*').eq('id', id).single();
+  const { data, error } = await supabase
+    .from('usuarios')
+    .select('id, nome, email, role, telefone, created_at')
+    .eq('id', id)
+    .single();
   if (error) throw error;
   return data;
 };
 
 export const create = async (payload) => {
-  const { data, error } = await supabase.from('usuarios').insert([payload]).select().single();
+  const { senha_hash, ...safePayload } = payload;
+  const { data, error } = await supabase
+    .from('usuarios')
+    .insert([safePayload])
+    .select('id, nome, email, role, telefone, created_at')
+    .single();
   if (error) throw error;
   return data;
 };
 
 export const update = async (id, payload) => {
-  const { data, error } = await supabase.from('usuarios').update(payload).eq('id', id).select().single();
+  const { senha_hash, ...safePayload } = payload;
+  const { data, error } = await supabase
+    .from('usuarios')
+    .update(safePayload)
+    .eq('id', id)
+    .select('id, nome, email, role, telefone, created_at')
+    .single();
   if (error) throw error;
   return data;
 };

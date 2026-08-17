@@ -13,13 +13,11 @@ export const login = async (email, password) => {
   }
 
   // Compare passwords
-  let isValid = false;
-  if (user.senha_hash) {
-    isValid = await bcrypt.compare(password, user.senha_hash);
-  } else {
-    // For development, if there's no hash, assume password is "123456"
-    isValid = (password === '123456'); 
+  if (!user.senha_hash) {
+    throw new Error('Credenciais inválidas.');
   }
+
+  const isValid = await bcrypt.compare(password, user.senha_hash);
 
   if (!isValid) {
     throw new Error('Credenciais inválidas.');
