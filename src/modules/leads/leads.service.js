@@ -1,7 +1,11 @@
 import { supabase } from '../../config/supabase.js';
 
-export const getLeads = async () => {
-  const { data, error } = await supabase.from('leads').select('*').order('created_at', { ascending: false });
+export const getLeads = async (captado_por) => {
+  let query = supabase.from('leads').select('*').order('created_at', { ascending: false });
+  if (captado_por) {
+    query = query.eq('captado_por', captado_por);
+  }
+  const { data, error } = await query;
   if (error) throw error;
   return data;
 };

@@ -2,7 +2,8 @@ import * as leadsService from './leads.service.js';
 
 export const getAll = async (req, res) => {
   try {
-    const data = await leadsService.getLeads();
+    const { captado_por } = req.query;
+    const data = await leadsService.getLeads(captado_por);
     res.json(data);
   } catch (error) {
     res.status(500).json({ error: error.message });
