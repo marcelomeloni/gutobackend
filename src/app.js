@@ -16,6 +16,7 @@ import authRoutes from './modules/auth/auth.routes.js';
 import municipiosRoutes from './modules/municipios/municipios.routes.js';
 
 import arquivosRoutes from './modules/arquivos/arquivos.routes.js';
+import webhookRoutes from './modules/webhooks/webhook.routes.js';
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use('/api/financeiro', financeiroRoutes);
 app.use('/api/usuarios', usuariosRoutes);
 app.use('/api/arquivos', arquivosRoutes);
 app.use('/api/municipios', municipiosRoutes);
+app.use('/api/webhooks', webhookRoutes);
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Backend Político Operacional' });
